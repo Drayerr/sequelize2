@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Op = require('sequelize').Op
 
 module.exports = {
     async create(req, res) {
