@@ -3,14 +3,10 @@ const UserController = require('./controllers/UserController')
 
 const routes = express.Router()
 
-routes.get('/', (req, res) => {
-    return res.send('Home')
-})
+routes.get('/', UserController.show)
 
 routes.post('/user', UserController.create)
 
-routes.get('/teste', (req, res) => {
-    return res.send('teste')
-})
+routes.get('/user/:id', UserController.listOne)
 
 module.exports = routes

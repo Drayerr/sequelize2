@@ -15,5 +15,22 @@ module.exports = {
         return res.json({ msg: 'New user created!' })
     },
 
+    async show(req, res) {
+        const users = await User.findAll(
+            ({
+                attributes : {
+                    exclude: ['password']
+                }
+            })
+        )
 
+        return res.json(users)
+    },
+
+    async listOne(req, res) {
+        const { id } = req.params
+        const user = User.findOne({ where: { id: id } })
+
+        return res.json(user)
+    }
 }
