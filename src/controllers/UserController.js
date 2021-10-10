@@ -32,5 +32,20 @@ module.exports = {
         const user = User.findOne({ where: { id: id } })
 
         return res.json(user)
+    },
+
+    async deleteUser(req, res) {
+        const { id } = req.params
+        await User.destroy({ where: { id: id}})
+
+        return res.json({ msg: 'Deleted'})
+    },
+
+    async updateUser(req, res) {
+        const { id } = req.params
+        const user = await User.findOne({ where: { id: id }})
+
+        await user.update(req.body)
+        res.json({ msg: 'User updated!'})
     }
 }
