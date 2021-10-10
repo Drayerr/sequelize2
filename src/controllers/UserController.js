@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const Op = require('sequelize').Op
+const AppErrors = require('../errors/AppErrors')
 
 module.exports = {
     async create(req, res) {
@@ -8,7 +9,7 @@ module.exports = {
         const alreadyExists = await User.findOne({ where: { [Op.or]: [{ username }, { cpf }] } })
 
         if (alreadyExists) {
-            console.log('Error: user already exists');
+            throw new AppErrors('User already exists', 401)
         }
 
         await User.create(req.body)
